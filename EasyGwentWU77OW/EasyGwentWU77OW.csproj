@@ -43,8 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Csatamezo.cs" />
     <Compile Include="IdojarasLap.cs" />
     <Compile Include="Jatekos.cs" />
+    <Compile Include="JatekosMezoi.cs" />
     <Compile Include="Lap.cs" />
     <Compile Include="MezonyLap.cs" />
     <Compile Include="Program.cs" />

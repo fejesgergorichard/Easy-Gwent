@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace EasyGwentWU77OW
 {
-    class IdojarasLap
+    class IdojarasLap : Lap
     {
+        LapTipus gyengitettTipus;
+
+        public IdojarasLap(LapTipus tipus, LapTipus gyengitettTipus) : base(tipus)
+        {
+            this.gyengitettTipus = gyengitettTipus;
+        }
     }
+
 }
