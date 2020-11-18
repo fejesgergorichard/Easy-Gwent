@@ -48,6 +48,7 @@
     <Compile Include="Jatekos.cs" />
     <Compile Include="JatekosMezoi.cs" />
     <Compile Include="Lap.cs" />
+    <Compile Include="LapGrafika.cs" />
     <Compile Include="MezonyLap.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

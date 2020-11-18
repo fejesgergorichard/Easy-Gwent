@@ -8,14 +8,25 @@ namespace EasyGwentWU77OW
 {
     class MezonyLap : Lap
     {
+        bool gyengitett = false;
         public int EredetiErtek { get; }        // Az eredeti érték csak olvasható
-        public int AktualisErtek { get; set; }  // Az aktuális értéken lehet változtatni
+        
+        public int AktualisErtek
+        {
+            get
+            {
+                if (gyengitett)
+                    return 1;
+                else
+                    return EredetiErtek;
+            }
+        }
 
         public MezonyLap(LapTipus tipus, int ertek) : base(tipus)
         {
             EredetiErtek = ertek;
         }
 
-        
+
     }
 }
