@@ -19,7 +19,8 @@ namespace EasyGwentWU77OW
 
     class Lap
     {
-        LapTipus tipus;
+        private LapTipus tipus;
+
         public LapTipus Tipus { get { return tipus; } }
         int szelesseg = 11;     // TODO: rajzoló osztály, ahol a grafikus adatokat tároljuk
         int magassag = 6;

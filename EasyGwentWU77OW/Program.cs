@@ -13,8 +13,8 @@ namespace EasyGwentWU77OW
         {
             Console.SetWindowPosition(0, 0);
             Console.SetBufferSize(1000, 800);
-            //Console.SetWindowSize(150, 60);
             Console.SetWindowSize(170, 55);
+            //Console.SetWindowSize(150, 60); 
             //int x = 1;
             //int y = 1;
             //while(true)

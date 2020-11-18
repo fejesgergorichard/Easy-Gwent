@@ -14,6 +14,40 @@ namespace EasyGwentWU77OW
         {
             this.gyengitettTipus = gyengitettTipus;
         }
+
+        /// <summary>
+        /// Aktiválja a lap hatását a mezőn elhelyezett lapokra.
+        /// </summary>
+        public void Aktival()
+        {
+            if (this.Tipus == LapTipus.Eso)
+            {
+
+            }
+            else if (this.Tipus == LapTipus.Kod)
+            {
+
+            }
+            else if (this.Tipus == LapTipus.Napsutes)
+            {
+                Visszaallit();
+            }
+
+        }
+
+        /// <summary>
+        /// Gyengíti az adott típusú kártyákat (értékük 1 lesz).
+        /// </summary>
+        /// <param name="gyengitettTipus">A gyengített kártya típus.</param>
+        public void Gyengit(LapTipus gyengitettTipus)
+        {
+
+        }
+
+        public void Visszaallit()
+        {
+
+        }
     }
 
 }

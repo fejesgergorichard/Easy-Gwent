@@ -8,5 +8,9 @@ namespace EasyGwentWU77OW
 {
     class Csatamezo
     {
+        public JatekosMezoi J1Mezoi { get; private set; }
+        public JatekosMezoi J2Mezoi { get; private set; }
+
+        IdojarasLap[] IdojarasLapok = new IdojarasLap[5];
     }
 }

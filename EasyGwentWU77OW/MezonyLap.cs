@@ -16,19 +16,6 @@ namespace EasyGwentWU77OW
             EredetiErtek = ertek;
         }
 
-        public void Aktival()
-        {
-
-        }
-
-        public void Gyengit()
-        {
-
-        }
-
-        public void Visszaallit()
-        {
-
-        }
+        
     }
 }
