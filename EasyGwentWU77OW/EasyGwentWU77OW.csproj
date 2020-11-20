@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Csatamezo.cs" />
+    <Compile Include="Gwent.cs" />
     <Compile Include="IdojarasLap.cs" />
     <Compile Include="Jatekos.cs" />
     <Compile Include="JatekosMezoi.cs" />

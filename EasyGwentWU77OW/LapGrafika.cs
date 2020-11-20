@@ -75,5 +75,34 @@ namespace EasyGwentWU77OW
 
             Console.SetCursorPosition(0, 0);
         }
+
+        public static void LapHelyetKirajzol(int x, int y, LapGrafika card)
+        {
+            int cardWidth = 11;
+            int cardHeight = 6;
+
+            Console.BackgroundColor = ConsoleColor.White;
+            for (int i = 0; i < cardHeight; i++)
+            {
+                Console.SetCursorPosition(x, y + i);
+                for (int j = 0; j < cardWidth; j++)
+                {
+                    Console.Write(" ");
+                }
+                Console.SetCursorPosition(x + cardWidth, y + i);
+            }
+
+            // Card stats
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(x + 1, y);
+            Console.Write(card.ertek);
+            Console.SetCursorPosition(x + 1, y + 2);
+            Console.Write(card.tipus);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Black;
+
+            Console.SetCursorPosition(0, 0);
+        }
     }
 }

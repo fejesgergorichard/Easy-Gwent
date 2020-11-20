@@ -11,17 +11,23 @@ namespace EasyGwentWU77OW
     {
         static void Main(string[] args)
         {
+            Gwent jatek = new Gwent();
+            jatek.Start();
+
+
+            Console.ReadLine();
+
             Console.SetWindowPosition(0, 0);
-            Console.SetBufferSize(1000, 800);
-            Console.SetWindowSize(170, 55);
+            Console.SetBufferSize(140, 45);
+            Console.SetWindowSize(150, 55);
             //Console.SetWindowSize(150, 60); 
 
 
             LapGrafika.MezonyLapokatKirajzol();
 
             Console.ReadLine();
-            Console.Clear();
 
+            Console.Clear();
             LapGrafika.MezonyLapokatKirajzol();
             Console.ReadLine();
         }

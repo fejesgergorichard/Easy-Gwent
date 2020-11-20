@@ -6,12 +6,20 @@ using System.Threading.Tasks;
 
 namespace EasyGwentWU77OW
 {
-    class Jatekos
+    public class Jatekos
     {
-        Random r = new Random();
+        private Random r = new Random();
+        public string Nev { get; private set; }
+        
         Lap[] OsztottLapok { get; set; }
-        int osztottLapokSzama;  // Ez trackeli hogy hány lap van még
+        int osztottLapokSzama;                              // Ez trackeli hogy hány lap van még
         Lap[] KezbenLevoLapok { get; set; }
+
+
+        public Jatekos(string nev)
+        {
+            Nev = nev;
+        }
 
         public void Felhuz()
         {
