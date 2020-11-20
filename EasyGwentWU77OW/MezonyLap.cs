@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace EasyGwentWU77OW
 {
-    class MezonyLap : Lap
+    public class MezonyLap : Lap
     {
-        bool gyengitett = false;
+        public bool Gyengitett { get; set; }
         public int EredetiErtek { get; }        // Az eredeti érték csak olvasható
         
         public int AktualisErtek
         {
             get
             {
-                if (gyengitett)
+                if (Gyengitett)
                     return 1;
                 else
                     return EredetiErtek;

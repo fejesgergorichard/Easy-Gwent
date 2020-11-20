@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace EasyGwentWU77OW
 {
-    class JatekosMezoi
+    public class JatekosMezoi
     {
-        MezonyLap[] GyalogosLapok = new MezonyLap[5];
-        MezonyLap[] TavolsagiLapok = new MezonyLap[5];
-        MezonyLap[] HarcigepLapok = new MezonyLap[5];
+        public MezonyLap[] GyalogosLapok = new MezonyLap[5];
+        public MezonyLap[] TavolsagiLapok = new MezonyLap[5];
+        public MezonyLap[] HarcigepLapok = new MezonyLap[5];
 
         public int OsszErtek()
         {

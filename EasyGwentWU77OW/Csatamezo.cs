@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EasyGwentWU77OW
 {
-    class Csatamezo
+    public class Csatamezo
     {
         public JatekosMezoi J1Mezoi { get; private set; }
         public JatekosMezoi J2Mezoi { get; private set; }
@@ -18,7 +18,7 @@ namespace EasyGwentWU77OW
         {
             for (int i = 0; i < IdojarasLapok.Length; i++)
             {
-                IdojarasLapok[i].Aktival();
+                IdojarasLapok[i].Aktival(this);
             }
         }
 
