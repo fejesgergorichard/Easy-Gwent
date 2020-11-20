@@ -10,10 +10,7 @@ namespace EasyGwentWU77OW
     {
         LapTipus gyengitettTipus;
 
-        public IdojarasLap(LapTipus tipus, LapTipus gyengitettTipus) : base(tipus)
-        {
-            this.gyengitettTipus = gyengitettTipus;
-        }
+        public IdojarasLap(LapTipus tipus) : base(tipus) { }
 
         /// <summary>
         /// Aktiválja a lap hatását a mezőn elhelyezett lapokra.
@@ -22,11 +19,15 @@ namespace EasyGwentWU77OW
         {
             if (this.Tipus == LapTipus.Eso)
             {
-
+                Gyengit(LapTipus.Harcigep);
             }
             else if (this.Tipus == LapTipus.Kod)
             {
-
+                Gyengit(LapTipus.Tavolsagi);
+            }
+            else if (this.Tipus == LapTipus.Fagy)
+            {
+                Gyengit(LapTipus.Gyalogos);
             }
             else if (this.Tipus == LapTipus.Napsutes)
             {

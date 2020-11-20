@@ -11,7 +11,7 @@ namespace EasyGwentWU77OW
         private Random r = new Random();
         public string Nev { get; private set; }
         
-        Lap[] OsztottLapok { get; set; }
+        public Lap[] OsztottLapok { get; set; }
         int osztottLapokSzama;                              // Ez trackeli hogy hány lap van még
         Lap[] KezbenLevoLapok { get; set; }
 
@@ -19,6 +19,8 @@ namespace EasyGwentWU77OW
         public Jatekos(string nev)
         {
             Nev = nev;
+            OsztottLapok = new Lap[15];
+            KezbenLevoLapok = new Lap[5];
         }
 
         public void Felhuz()

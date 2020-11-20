@@ -14,6 +14,7 @@ namespace EasyGwentWU77OW
         Harcigep,
         Kod,
         Eso,
+        Fagy,
         Napsutes
     }
 
