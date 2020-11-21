@@ -12,12 +12,15 @@ namespace EasyGwentWU77OW
         Random r = new Random();
         public Jatekos Jatekos1 { get; private set; }
         public Jatekos Jatekos2 { get; private set; }
+        public Csatamezo csatamezo = new Csatamezo();
         Lap[] pakli = new Lap[30];
         int hatralevoKorokSzama = 3;        // 3...0
         bool jatekFolyamatban = true;
 
-
-        public void Start()
+        /// <summary>
+        /// Játék inicializálása.
+        /// </summary>
+        public void Init()
         {
             // Játékos 1 létrehozása
             string nev;
@@ -36,7 +39,7 @@ namespace EasyGwentWU77OW
                 Console.Write("Játékos 2 neve: ");
                 nev = Console.ReadLine();
             }
-            while (nev == null || nev == "");
+            while (nev == null || nev == "" || nev == Jatekos1.Nev);
             Jatekos2 = new Jatekos(nev);
 
             // Pakli generálás
@@ -46,7 +49,7 @@ namespace EasyGwentWU77OW
             Kever();
             for (int i = 0; i < 3; i++)
             {
-                Thread.Sleep(300);
+                Thread.Sleep(150);
                 Console.Write(".");
             }
 
@@ -56,7 +59,7 @@ namespace EasyGwentWU77OW
             LapokatKioszt();
             for (int i = 0; i < 3; i++)
             {
-                Thread.Sleep(300);
+                Thread.Sleep(150);
                 Console.Write(".");
             }
 

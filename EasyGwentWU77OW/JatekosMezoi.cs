@@ -8,47 +8,16 @@ namespace EasyGwentWU77OW
 {
     public class JatekosMezoi
     {
-        public MezonyLap[] GyalogosLapok = new MezonyLap[5];
-        public MezonyLap[] TavolsagiLapok = new MezonyLap[5];
-        public MezonyLap[] HarcigepLapok = new MezonyLap[5];
-
-        public int OsszErtek()
-        {
-            return GyalogosLapokOsszErteke() + TavolsagiLapokOsszErteke() + HarcigepLapokOsszErteke();
-        }
+        public MezonyLap[] LerakottLapok = new MezonyLap[5];
 
         // Megjelenítés miatt készült külön függvény minden típus össz értékéhez
-        public int GyalogosLapokOsszErteke()
+        public int OsszErtek()
         {
             int sum = 0;
-            for (int i = 0; i < GyalogosLapok.Length; i++)
+            for (int i = 0; i < LerakottLapok.Length; i++)
             {
-                if (GyalogosLapok[i] != null)
-                    sum += GyalogosLapok[i].AktualisErtek;
-            }
-
-            return sum;
-        }
-
-        public int TavolsagiLapokOsszErteke()
-        {
-            int sum = 0;
-            for (int i = 0; i < TavolsagiLapok.Length; i++)
-            {
-                if (TavolsagiLapok[i] != null)
-                    sum += TavolsagiLapok[i].AktualisErtek;
-            }
-
-            return sum;
-        }
-
-        public int HarcigepLapokOsszErteke()
-        {
-            int sum = 0;
-            for (int i = 0; i < HarcigepLapok.Length; i++)
-            {
-                if (HarcigepLapok[i] != null)
-                    sum += HarcigepLapok[i].AktualisErtek;
+                if (LerakottLapok[i] != null)
+                    sum += LerakottLapok[i].AktualisErtek;
             }
 
             return sum;

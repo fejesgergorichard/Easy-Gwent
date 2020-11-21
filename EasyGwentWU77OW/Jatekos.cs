@@ -12,7 +12,6 @@ namespace EasyGwentWU77OW
         public string Nev { get; private set; }
         
         public Lap[] OsztottLapok { get; set; }
-        int osztottLapokSzama;                              // Ez trackeli hogy hány lap van még
         Lap[] KezbenLevoLapok { get; set; }
 
 
@@ -25,15 +24,26 @@ namespace EasyGwentWU77OW
 
         public void Felhuz()
         {
-            for (int i = 0; i < KezbenLevoLapok.Length; i++)
+            while (KezbenLevoLapokSzama() != 5)
             {
-                if (KezbenLevoLapok[i] == null)
+                for (int i = 0; i < KezbenLevoLapok.Length; i++)
                 {
-                    int j = r.Next(OsztottLapok.Length);    // TODO: Lehet jobb ha nem random
-                    KezbenLevoLapok[i] = OsztottLapok[j];
+
                 }
             }
         }
+
+        //public void Felhuz()
+        //{
+        //    for (int i = 0; i < KezbenLevoLapok.Length; i++)
+        //    {
+        //        if (KezbenLevoLapok[i] == null)
+        //        {
+        //            int j = r.Next(OsztottLapok.Length);    // TODO: Lehet jobb ha nem random
+        //            KezbenLevoLapok[i] = OsztottLapok[j];
+        //        }
+        //    }
+        //}
 
         public int KezbenLevoLapokSzama()
         {
@@ -41,6 +51,17 @@ namespace EasyGwentWU77OW
             for (int i = 0; i < KezbenLevoLapok.Length; i++)
             {
                 if (KezbenLevoLapok[i] != null)
+                    db++;
+            }
+            return db;
+        }
+
+        public int OsztottLapokSzama()
+        {
+            int db = 0;
+            for (int i = 0; i < OsztottLapok.Length; i++)
+            {
+                if (OsztottLapok[i] != null)
                     db++;
             }
             return db;

@@ -6,17 +6,19 @@ using System.Threading.Tasks;
 
 namespace EasyGwentWU77OW
 {
-    class LapGrafika
+    class Grafika
     {
         const int szelesseg = 11;
         const int magassag = 6;
-        const int kezbenLevoLapokKoordinataja = 45;
+        const int kezbenLevoLapokY = 46;
+        const int idojarasLapokX = 82;
+        const int idojarasLapokY = 20;
 
         Random r = new Random();
         int ertek { get; set; }
         string tipus { get; set; }
 
-        public LapGrafika(Lap lap)
+        public Grafika(Lap lap)
         {
             this.tipus = lap.Tipus.ToString();
             this.ertek = ((MezonyLap)lap).AktualisErtek;
@@ -24,18 +26,27 @@ namespace EasyGwentWU77OW
 
         public static void MezonyLapokatKirajzolTeszt()
         {
+            Console.SetCursorPosition(0, 0);
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.Write("-----------------------------------------------------------------");
+            Console.ForegroundColor = ConsoleColor.White;
+
+
             int y = 1;
+            // 6 sort fogunk kirajzolni (játékosonként 3-3)
             for (int i = 0; i < 6; i++)
             {
+                // Egy sor mezőny lap
                 for (int j = 0; j < 5; j++)
                 {
-                    LapotKirajzol((j * (szelesseg + 2) + 1), y, new LapGrafika(new MezonyLap(LapTipus.Gyalogos, 9)));
+                    LapotKirajzol((j * (szelesseg + 2) + 1), y, new Grafika(new MezonyLap(LapTipus.Gyalogos, 9)));
                 }
-                Console.SetCursorPosition(0, y + 6);
-                Console.ForegroundColor = ConsoleColor.DarkCyan;
-                Console.Write("------------------------------------------------------------------");
+                Console.SetCursorPosition(0, y + magassag);
+                Console.ForegroundColor = (i < 2) ? ConsoleColor.DarkGreen : ConsoleColor.DarkCyan;
+                Console.Write("-----------------------------------------------------------------");
                 Console.ForegroundColor = ConsoleColor.White;
-                y += magassag + 1;
+
+                y += (i == 2) ? magassag + 2 : magassag + 1;
             }
 
             // Kézben lévő lapok
@@ -44,6 +55,11 @@ namespace EasyGwentWU77OW
 
         public static void LapokHelyetKirajzolTeszt()
         {
+            Console.SetCursorPosition(0, 0);
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.Write("-----------------------------------------------------------------");
+            Console.ForegroundColor = ConsoleColor.White;
+
             int y = 1;
             for (int i = 0; i < 6; i++)
             {
@@ -52,10 +68,10 @@ namespace EasyGwentWU77OW
                     LapHelyetKirajzol((j * (szelesseg + 2) + 1), y);
                 }
                 Console.SetCursorPosition(0, y + 6);
-                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.ForegroundColor = (i > 2) ? ConsoleColor.DarkGreen : ConsoleColor.DarkCyan;
                 Console.Write("------------------------------------------------------------------");
                 Console.ForegroundColor = ConsoleColor.White;
-                y += magassag + 1;
+                y += (i == 2) ? magassag + 2 : magassag + 1;
             }
 
             // Kézben lévő lapok
@@ -65,29 +81,26 @@ namespace EasyGwentWU77OW
 
         private static int KezbenLevoLapokatKirajzol()
         {
-            int y = kezbenLevoLapokKoordinataja;
+            int y = kezbenLevoLapokY;
             for (int j = 0; j < 5; j++)
             {
-                LapotKirajzol((j * (szelesseg + 2) + 1), y, new LapGrafika(new MezonyLap(LapTipus.Harcigep, 9)));
+                LapotKirajzol((j * (szelesseg + 2) + 1), y, new Grafika(new MezonyLap(LapTipus.Harcigep, 9)));
             }
 
             return y;
         }
 
-        public static void LapotKirajzol(int x, int y, LapGrafika card)
+        public static void LapotKirajzol(int x, int y, Grafika card)
         {
-            int cardWidth = 11;
-            int cardHeight = 6;
-
             Console.BackgroundColor = ConsoleColor.White;
-            for (int i = 0; i < cardHeight; i++)
+            for (int i = 0; i < magassag; i++)
             {
                 Console.SetCursorPosition(x, y + i);
-                for (int j = 0; j < cardWidth; j++)
+                for (int j = 0; j < szelesseg; j++)
                 {
                     Console.Write(" ");
                 }
-                Console.SetCursorPosition(x + cardWidth, y + i);
+                Console.SetCursorPosition(x + szelesseg, y + i);
             }
 
             // Card stats
@@ -105,18 +118,14 @@ namespace EasyGwentWU77OW
 
         public static void LapHelyetKirajzol(int x, int y)
         {
-            int cardWidth = 11;
-            int cardHeight = 6;
-
-            //Console.BackgroundColor = ConsoleColor.White;
-            for (int i = 0; i < cardHeight; i++)
+            for (int i = 0; i < magassag; i++)
             {
                 Console.SetCursorPosition(x, y + i);
-                for (int j = 0; j < cardWidth; j++)
+                for (int j = 0; j < szelesseg; j++)
                 {
                     Console.Write(".");
                 }
-                Console.SetCursorPosition(x + cardWidth, y + i);
+                Console.SetCursorPosition(x + szelesseg, y + i);
             }
 
             Console.ForegroundColor = ConsoleColor.White;

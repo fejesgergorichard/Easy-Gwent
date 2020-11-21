@@ -40,39 +40,44 @@ namespace EasyGwentWU77OW
         /// <param name="gyengitettTipus">A gyengített kártya típus.</param>
         public void Gyengit(LapTipus gyengitettTipus, Csatamezo csatamezo)
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < csatamezo.J1Mezoi.LerakottLapok.Length; i++)
             {
-                if (csatamezo.J1Mezoi.GyalogosLapok[i] != null && csatamezo.J1Mezoi.GyalogosLapok[i].Tipus == gyengitettTipus)
+                // Játékos 1 lerakott lapjait gyengíti
+                if (csatamezo.J1Mezoi.LerakottLapok[i] != null && csatamezo.J1Mezoi.LerakottLapok[i].Tipus == gyengitettTipus)
                 {
-                    csatamezo.J1Mezoi.GyalogosLapok[i].Gyengitett = true;
+                    csatamezo.J1Mezoi.LerakottLapok[i].Gyengitett = true;
                 }
-                if (csatamezo.J1Mezoi.HarcigepLapok[i] != null && csatamezo.J1Mezoi.HarcigepLapok[i].Tipus == gyengitettTipus)
+
+                // Játékos 2 lerakott lapjait gyengítí
+                if (csatamezo.J2Mezoi.LerakottLapok[i] != null && csatamezo.J2Mezoi.LerakottLapok[i].Tipus == gyengitettTipus)
                 {
-                    csatamezo.J1Mezoi.HarcigepLapok[i].Gyengitett = true;
-                }
-                if (csatamezo.J1Mezoi.TavolsagiLapok[i] != null && csatamezo.J1Mezoi.TavolsagiLapok[i].Tipus == gyengitettTipus)
-                {
-                    csatamezo.J1Mezoi.TavolsagiLapok[i].Gyengitett = true;
+                    csatamezo.J2Mezoi.LerakottLapok[i].Gyengitett = true;
                 }
             }
         }
 
         public void Visszaallit(Csatamezo csatamezo)
         {
+            // Értékek visszaállításra alapra
             for (int i = 0; i < 5; i++)
             {
-                if (csatamezo.J1Mezoi.GyalogosLapok[i] != null)
+                // Játékos 1 lerakott lapjai
+                if (csatamezo.J1Mezoi.LerakottLapok[i] != null)
                 {
-                    csatamezo.J1Mezoi.GyalogosLapok[i].Gyengitett = false;
+                    csatamezo.J1Mezoi.LerakottLapok[i].Gyengitett = false;
                 }
-                if (csatamezo.J1Mezoi.HarcigepLapok[i] != null)
+
+                // Játékos 2 lerakott lapjai
+                if (csatamezo.J2Mezoi.LerakottLapok[i] != null)
                 {
-                    csatamezo.J1Mezoi.HarcigepLapok[i].Gyengitett = false;
+                    csatamezo.J2Mezoi.LerakottLapok[i].Gyengitett = false;
                 }
-                if (csatamezo.J1Mezoi.TavolsagiLapok[i] != null)
-                {
-                    csatamezo.J1Mezoi.TavolsagiLapok[i].Gyengitett = false;
-                }
+            }
+
+            // Minden időjárás lap eltüntetése
+            for (int i = 0; i < csatamezo.IdojarasLapok.Length; i++)
+            {
+                csatamezo.IdojarasLapok[i] = null;
             }
         }
     }

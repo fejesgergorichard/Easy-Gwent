@@ -16,16 +16,16 @@ namespace EasyGwentWU77OW
             Console.SetWindowSize(150, 55);
 
             Gwent jatek = new Gwent();
-            jatek.Start();
+            jatek.Init();
             Console.ReadLine();
             Console.Clear();
 
-            LapGrafika.LapokHelyetKirajzolTeszt();
+            Grafika.LapokHelyetKirajzolTeszt();
 
             Console.ReadLine();
             Console.Clear();
 
-            LapGrafika.MezonyLapokatKirajzolTeszt();
+            Grafika.MezonyLapokatKirajzolTeszt();
 
             Console.ReadLine();
 
