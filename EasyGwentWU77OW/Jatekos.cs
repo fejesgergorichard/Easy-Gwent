@@ -24,12 +24,17 @@ namespace EasyGwentWU77OW
             KezbenLevoLapok = new Lap[5];
         }
 
+
+        /// <summary>
+        /// Az OsztottLapokból a KezbenLevoLapok tömböt feltölti, ahol hiányzó elem van.
+        /// </summary>
         public void Felhuz()
         {
             while (KezbenLevoLapokSzama() != 5 && OsztottLapokSzama() > 0)
             {
                 for (int i = 0; i < KezbenLevoLapok.Length; i++)
                 {
+                    // Ha az indexen nincs lap, felhúzunk egyet
                     if (KezbenLevoLapok[i] == null)
                     {
                         int j = 0;
@@ -47,7 +52,10 @@ namespace EasyGwentWU77OW
             }
         }
 
-
+        /// <summary>
+        /// Megszámolja a KezbenLevoLapok tömbben lévő elemek számát.
+        /// </summary>
+        /// <returns>Kézben lévő lapok száma.</returns>
         public int KezbenLevoLapokSzama()
         {
             int db = 0;
@@ -59,6 +67,10 @@ namespace EasyGwentWU77OW
             return db;
         }
 
+        /// <summary>
+        /// Megszámolja hány osztott lap van a játékosnál.
+        /// </summary>
+        /// <returns></returns>
         public int OsztottLapokSzama()
         {
             int db = 0;

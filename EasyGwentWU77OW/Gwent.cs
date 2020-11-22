@@ -7,18 +7,18 @@ using System.Threading;
 
 namespace EasyGwentWU77OW
 {
-    public class Gwent
+    class Gwent
     {
         Random r = new Random();
         Lap[] pakli = new Lap[30];
-        public Jatekos Jatekos1 { get; private set; }
-        public Jatekos Jatekos2 { get; private set; }
-        public Csatamezo Csatamezo = new Csatamezo();
+        Jatekos Jatekos1 { get; set; }
+        Jatekos Jatekos2 { get; set; }
+        Csatamezo Csatamezo = new Csatamezo();
 
         /// <summary>
         /// Játék inicializálása.
         /// </summary>
-        public void Init()
+        public void Start()
         {
             Console.Clear();
             Console.WriteLine(
@@ -97,10 +97,10 @@ namespace EasyGwentWU77OW
         /// <summary>
         /// A játék fő loopja. Mindaddig ismétlődik, amíg valamelyik játékosnak van élete és a felhasználó játszani akar.
         /// </summary>
-        public void Loop()
+        private void Loop()
         {
-            // TODO: amíg nem 0 kör és nem 0 élet van valakinél, addig ismétlődjön
-            // kirajzoljuk, megkérdezzük a játékost 5x hogy az adott lapot lerakja-e. a lap sárga lesz
+            // Amíg nem 0 élet van valakinél, addig ismétlődjön
+            // kirajzoljuk az állapotot, megkérdezzük a játékost 5x hogy az adott lapot lerakja-e. a kijelölt lap sárga lesz
             //// minden eldöntés után aktiváljuk az időjárás lapokat majd újra rajzolunk
             // Utána a másiknál ugyanezt eljátsszuk és a végén kiírjuk hogy ki nyert
             while (Jatekos1.EletekSzama > 0 && Jatekos2.EletekSzama > 0)
@@ -124,6 +124,11 @@ namespace EasyGwentWU77OW
             JatekvegiKiertekeles();
         }
 
+        /// <summary>
+        /// Egy játékos köre. Ebben a körben dönthet minden kézben lévő lapról, hogy lerakja-e vagy sem.
+        /// </summary>
+        /// <param name="jatekos">A soron következő játékos.</param>
+        /// <param name="elhelyezettLapjai">Az őáltala lerakott lapok helye a csatamezőn.</param>
         private void JatekosKore(Jatekos jatekos, MezonyLap[] elhelyezettLapjai)
         {
             for (int i = 0; i < jatekos.KezbenLevoLapok.Length; i++)
@@ -196,8 +201,7 @@ namespace EasyGwentWU77OW
 
             if (be.ToLower() == "i")
             {
-                Init();
-                Loop();
+                Start();
             }
             else
             {

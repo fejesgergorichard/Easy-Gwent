@@ -12,11 +12,13 @@ namespace EasyGwentWU77OW
         static void Main(string[] args)
         {
             Console.SetWindowPosition(0, 0);
-            Console.SetBufferSize(140, 45);
-            Console.SetWindowSize(150, 55);
+            //Console.SetBufferSize(140, 45);
+            //Console.SetWindowSize(150, 55);
+            Console.SetBufferSize(130, 40);
+            Console.SetWindowSize(130, 40);
 
             Gwent jatek = new Gwent();
-            jatek.Init();
+            jatek.Start();
 
         }
 

@@ -8,8 +8,6 @@ namespace EasyGwentWU77OW
 {
     class Grafika
     {
-        // TODO: aktuális csatatér kirajzolása
-        // TODO: 1-1 sor a játékosoknak, 1 sor az időjárásnak
         const int szelesseg = 11;
         const int magassag = 6;
         const int kezbenLevoLapokY = 46;
@@ -38,6 +36,13 @@ namespace EasyGwentWU77OW
                 this.ertek = 0;
         }
 
+
+        /// <summary>
+        /// Kirajzolja a csatamezőt és az egyes játékosok statisztikáit.
+        /// </summary>
+        /// <param name="csatamezo">Csatamező</param>
+        /// <param name="j1">Játékos 1</param>
+        /// <param name="j2">Játékos 2</param>
         public static void CsatamezotKirajzol(Csatamezo csatamezo, Jatekos j1, Jatekos j2)
         {
             VonalatRajzol(0, ConsoleColor.DarkCyan);
@@ -65,6 +70,11 @@ namespace EasyGwentWU77OW
             VonalatRajzol(22, ConsoleColor.DarkCyan);
         }
 
+        /// <summary>
+        /// Kirajzolja az adott játékos kezében lévő lapokat, beszínezve az épp kiválasztott lapot.
+        /// </summary>
+        /// <param name="jatekos">Játékos akinek a lapjait meg akarjuk jeleníteni.</param>
+        /// <param name="kivalasztottLapSzama">A kiválasztott lap indexe.</param>
         public static void KezbenLevoLapokatKirajzol(Jatekos jatekos, int kivalasztottLapSzama)
         {
             int y = 25;
@@ -83,6 +93,11 @@ namespace EasyGwentWU77OW
             Console.Write($"{jatekos.Nev} Lapjai");
         }
 
+        /// <summary>
+        /// Kirajzol egy Lap[] tömböt az adott y koordinátára.
+        /// </summary>
+        /// <param name="y">y koordináta.</param>
+        /// <param name="lapok">A kirajzolandó tömb.</param>
         public static void SortKirajzol(int y, Lap[] lapok)
         {
             for (int i = 0; i < lapok.Length; i++)
@@ -98,6 +113,11 @@ namespace EasyGwentWU77OW
             }
         }
 
+        /// <summary>
+        /// Rajzol egy vízszintes elválasztó vonalat az adott y koordinátára, szin színnel.
+        /// </summary>
+        /// <param name="y">Vonal y koordinátája.</param>
+        /// <param name="szin">Vonal színe.</param>
         private static void VonalatRajzol(int y, ConsoleColor szin)
         {
             Console.SetCursorPosition(0, y);
@@ -106,6 +126,12 @@ namespace EasyGwentWU77OW
             Console.ForegroundColor = ConsoleColor.White;
         }
 
+        /// <summary>
+        /// Kirajzol egy lapot a megadott x,y koordinátákra.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="lapGrafika">Megjelenítéshez használt lapgrafika.</param>
         public static void LapotKirajzol(int x, int y, Grafika lapGrafika)
         {
             Console.BackgroundColor = lapGrafika.lapSzin;
@@ -132,6 +158,11 @@ namespace EasyGwentWU77OW
             Console.SetCursorPosition(0, 0);
         }
 
+        /// <summary>
+        /// Kirajzolja egy lap placeholderét a megadott x,y koordinátákra.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public static void LapHelyetKirajzol(int x, int y)
         {
             for (int i = 0; i < magassag; i++)
@@ -204,7 +235,6 @@ namespace EasyGwentWU77OW
 
             return y;
         }
-
         #endregion
     }
 }
