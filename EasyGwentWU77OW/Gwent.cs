@@ -14,7 +14,7 @@ namespace EasyGwentWU77OW
         public Jatekos Jatekos1 { get; private set; }
         public Jatekos Jatekos2 { get; private set; }
         public Csatamezo Csatamezo = new Csatamezo();
-        
+
         int hatralevoKorokSzama = 3;        // 3...0
         bool jatekFolyamatban = true;
 
@@ -96,7 +96,7 @@ namespace EasyGwentWU77OW
             Console.WriteLine();
             Console.WriteLine("A játék készen áll. Üss entert a kezdéshez!");
             Console.ReadLine();
-            
+
             // Indul a játék
             Loop();
         }
@@ -109,6 +109,7 @@ namespace EasyGwentWU77OW
             // Utána a másiknál ugyanezt eljátsszuk és a végén kiírjuk hogy kinek hány pontja van, ki nyert
             while (hatralevoKorokSzama > 0 && (Jatekos1.EletekSzama > 0 || Jatekos2.EletekSzama > 0))
             {
+                // Játékos 1 dönt 5 alkalommal
                 for (int i = 0; i < Jatekos1.KezbenLevoLapok.Length; i++)
                 {
                     string bemenet;
@@ -119,19 +120,77 @@ namespace EasyGwentWU77OW
                     Console.WriteLine($"{Jatekos1.Nev} köre.\nLerakod a kijelölt {Jatekos1.KezbenLevoLapok[i].Tipus.ToString()} lapot? (I/N)");
                     do
                     {
-                        Console.SetCursorPosition(0, 34);
+                        Console.SetCursorPosition(0, 35);
                         bemenet = Console.ReadLine();
                     } while (bemenet.ToLower() != "i" && bemenet.ToLower() != "n");
 
                     if (bemenet.ToLower() == "i")
                     {
                         if (Jatekos1.KezbenLevoLapok[i] is MezonyLap)
+                        {
                             Csatamezo.J1Lapjai[i] = (MezonyLap)Jatekos1.KezbenLevoLapok[i];
+                            Jatekos1.KezbenLevoLapok[i] = null;
+                        }
                         else
-                            Csatamezo.IdojarasLapok[1] = (IdojarasLap)Jatekos1.KezbenLevoLapok[i];
+                        {
+                            int x = Csatamezo.SzabadIdojarasKoordinata();
+                            if (x < 5)
+                            {
+                                Csatamezo.IdojarasLapok[x] = (IdojarasLap)Jatekos1.KezbenLevoLapok[i];
+                                Jatekos1.KezbenLevoLapok[i] = null;
+                            }
+                            else
+                            {
+                                Console.SetCursorPosition(0, 35);
+                                Console.WriteLine("Nem helyezhetsz el több időjárás lapot.");
+                            }
+                        }
                     }
-                    hatralevoKorokSzama--;
+                }
 
+                Console.Clear();
+                Grafika.CsatamezotKirajzol(Csatamezo, Jatekos1, Jatekos2);
+                Console.SetCursorPosition(0, 32);
+                Console.WriteLine($"{Jatekos2.Nev} következik. Üss entert ha készen állsz!");
+                Console.ReadLine();
+
+                // Játékos 2 dönt 5 alkalommal
+                for (int i = 0; i < Jatekos2.KezbenLevoLapok.Length; i++)
+                {
+                    string bemenet;
+                    Console.Clear();
+                    Grafika.CsatamezotKirajzol(Csatamezo, Jatekos1, Jatekos2);
+                    Grafika.KezbenLevoLapokatKirajzol(Jatekos2, i);
+                    Console.SetCursorPosition(0, 32);
+                    Console.WriteLine($"{Jatekos2.Nev} köre.\nLerakod a kijelölt {Jatekos2.KezbenLevoLapok[i].Tipus.ToString()} lapot? (I/N)");
+                    do
+                    {
+                        Console.SetCursorPosition(0, 35);
+                        bemenet = Console.ReadLine();
+                    } while (bemenet.ToLower() != "i" && bemenet.ToLower() != "n");
+
+                    if (bemenet.ToLower() == "i")
+                    {
+                        if (Jatekos2.KezbenLevoLapok[i] is MezonyLap)
+                        { 
+                            Csatamezo.J2Lapjai[i] = (MezonyLap)Jatekos2.KezbenLevoLapok[i];
+                            Jatekos2.KezbenLevoLapok[i] = null;
+                        }
+                        else
+                        {
+                            int x = Csatamezo.SzabadIdojarasKoordinata();
+                            if (x < 5)
+                            {
+                                Csatamezo.IdojarasLapok[x] = (IdojarasLap)Jatekos2.KezbenLevoLapok[i];
+                                Jatekos2.KezbenLevoLapok[i] = null;
+                            }
+                            else
+                            {
+                                Console.SetCursorPosition(0, 35);
+                                Console.WriteLine("Nem helyezhetsz el több időjárás lapot.");
+                            }
+                        }
+                    }
                 }
             }
         }

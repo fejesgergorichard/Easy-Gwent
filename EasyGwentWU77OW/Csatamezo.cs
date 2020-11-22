@@ -16,6 +16,15 @@ namespace EasyGwentWU77OW
         public int Jatekos1Pontjai { get { return OsszErtek(J1Lapjai); } }
         public int Jatekos2Pontjai { get { return OsszErtek(J2Lapjai); } }
 
+        public int SzabadIdojarasKoordinata()
+        {
+            int i = 0;
+            while (i < IdojarasLapok.Length && IdojarasLapok[i] != null)
+            {
+                i++;
+            }
+            return i;
+        }
 
         public void IdojarasLapokatAktival()
         {
