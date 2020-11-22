@@ -145,9 +145,9 @@ namespace EasyGwentWU77OW
                 Console.SetCursorPosition(x + szelesseg, y + i);
             }
 
-            // Card stats
+            // Kártya adatai
             Console.ForegroundColor = ConsoleColor.Black;
-            Console.BackgroundColor = ConsoleColor.White;
+            Console.BackgroundColor = lapGrafika.lapSzin;
             Console.SetCursorPosition(x + 1, y);
             Console.Write((lapGrafika.ertek > 0) ? lapGrafika.ertek.ToString() : "");
             Console.SetCursorPosition(x + 1, y + 2);
