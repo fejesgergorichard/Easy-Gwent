@@ -16,6 +16,29 @@ namespace EasyGwentWU77OW
         public int Jatekos1Pontjai { get { return OsszErtek(J1Lapjai); } }
         public int Jatekos2Pontjai { get { return OsszErtek(J2Lapjai); } }
 
+        public void Tisztit()
+        {
+            J1Lapjai = new MezonyLap[5];
+            J2Lapjai = new MezonyLap[5];
+            IdojarasLapok = new IdojarasLap[5];
+        }
+
+        public int ElhelyezettLapokTipusbol(LapTipus tipus)
+        {
+            int sum = 0;
+            for (int i = 0; i < J1Lapjai.Length; i++)
+            {
+                if (J1Lapjai[i] != null && J1Lapjai[i].Tipus == tipus)
+                    sum++;
+                if (J2Lapjai[i] != null && J2Lapjai[i].Tipus == tipus)
+                    sum++;
+                if (IdojarasLapok[i] != null && IdojarasLapok[i].Tipus == tipus)
+                    sum++;
+            }
+
+            return sum;
+        }
+
         public int SzabadIdojarasKoordinata()
         {
             int i = 0;

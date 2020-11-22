@@ -17,13 +17,6 @@ namespace EasyGwentWU77OW
 
             Gwent jatek = new Gwent();
             jatek.Init();
-            Console.ReadLine();
-
-            Console.Clear();
-            
-
-            Console.ReadLine();
-
 
         }
 

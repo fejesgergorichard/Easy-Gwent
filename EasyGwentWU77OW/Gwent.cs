@@ -15,14 +15,12 @@ namespace EasyGwentWU77OW
         public Jatekos Jatekos2 { get; private set; }
         public Csatamezo Csatamezo = new Csatamezo();
 
-        int hatralevoKorokSzama = 3;        // 3...0
-        bool jatekFolyamatban = true;
-
         /// <summary>
         /// Játék inicializálása.
         /// </summary>
         public void Init()
         {
+            Console.Clear();
             Console.WriteLine(
                 @"
                    {}
@@ -89,10 +87,6 @@ namespace EasyGwentWU77OW
                 Console.Write(".");
             }
 
-            // Játékosok lapokat húznak
-            Jatekos1.Felhuz();
-            Jatekos2.Felhuz();
-
             Console.WriteLine();
             Console.WriteLine("A játék készen áll. Üss entert a kezdéshez!");
             Console.ReadLine();
@@ -100,101 +94,148 @@ namespace EasyGwentWU77OW
             // Indul a játék
             Loop();
         }
-
+        /// <summary>
+        /// A játék fő loopja. Mindaddig ismétlődik, amíg valamelyik játékosnak van élete és a felhasználó játszani akar.
+        /// </summary>
         public void Loop()
         {
             // TODO: amíg nem 0 kör és nem 0 élet van valakinél, addig ismétlődjön
             // kirajzoljuk, megkérdezzük a játékost 5x hogy az adott lapot lerakja-e. a lap sárga lesz
             //// minden eldöntés után aktiváljuk az időjárás lapokat majd újra rajzolunk
-            // Utána a másiknál ugyanezt eljátsszuk és a végén kiírjuk hogy kinek hány pontja van, ki nyert
-            while (hatralevoKorokSzama > 0 && (Jatekos1.EletekSzama > 0 || Jatekos2.EletekSzama > 0))
+            // Utána a másiknál ugyanezt eljátsszuk és a végén kiírjuk hogy ki nyert
+            while (Jatekos1.EletekSzama > 0 && Jatekos2.EletekSzama > 0)
             {
-                // Játékos 1 dönt 5 alkalommal
-                for (int i = 0; i < Jatekos1.KezbenLevoLapok.Length; i++)
-                {
-                    string bemenet;
-                    Console.Clear();
-                    Grafika.CsatamezotKirajzol(Csatamezo, Jatekos1, Jatekos2);
-                    Grafika.KezbenLevoLapokatKirajzol(Jatekos1, i);
-                    Console.SetCursorPosition(0, 32);
-                    Console.WriteLine($"{Jatekos1.Nev} köre.\nLerakod a kijelölt {Jatekos1.KezbenLevoLapok[i].Tipus.ToString()} lapot? (I/N)");
-                    do
-                    {
-                        Console.SetCursorPosition(0, 35);
-                        bemenet = Console.ReadLine();
-                    } while (bemenet.ToLower() != "i" && bemenet.ToLower() != "n");
+                // Kiürítjük a csatamezőt
+                Csatamezo.Tisztit();
 
-                    if (bemenet.ToLower() == "i")
-                    {
-                        if (Jatekos1.KezbenLevoLapok[i] is MezonyLap)
-                        {
-                            Csatamezo.J1Lapjai[i] = (MezonyLap)Jatekos1.KezbenLevoLapok[i];
-                            Jatekos1.KezbenLevoLapok[i] = null;
-                        }
-                        else
-                        {
-                            int x = Csatamezo.SzabadIdojarasKoordinata();
-                            if (x < 5)
-                            {
-                                Csatamezo.IdojarasLapok[x] = (IdojarasLap)Jatekos1.KezbenLevoLapok[i];
-                                Jatekos1.KezbenLevoLapok[i] = null;
-                            }
-                            else
-                            {
-                                Console.SetCursorPosition(0, 35);
-                                Console.WriteLine("Nem helyezhetsz el több időjárás lapot.");
-                            }
-                        }
-                    }
-                }
+                // Játékos 1 húz, majd dönt 5 alkalommal
+                Jatekos1.Felhuz();
+                JatekosKore(Jatekos1, Csatamezo.J1Lapjai);
 
+                // Játékos 2 lapot húz, majd dönt 5 alkalommal
+                Jatekos2.Felhuz();
+                JatekosKore(Jatekos2, Csatamezo.J2Lapjai);
+
+                // Kör végi kiértékelés
+                KorvegiKiertekeles();
+            }
+
+            // Játék végi kiértékelés
+            JatekvegiKiertekeles();
+        }
+
+        private void JatekosKore(Jatekos jatekos, MezonyLap[] elhelyezettLapjai)
+        {
+            for (int i = 0; i < jatekos.KezbenLevoLapok.Length; i++)
+            {
+                string bemenet;
                 Console.Clear();
                 Grafika.CsatamezotKirajzol(Csatamezo, Jatekos1, Jatekos2);
+                Grafika.KezbenLevoLapokatKirajzol(jatekos, i);
                 Console.SetCursorPosition(0, 32);
-                Console.WriteLine($"{Jatekos2.Nev} következik. Üss entert ha készen állsz!");
-                Console.ReadLine();
-
-                // Játékos 2 dönt 5 alkalommal
-                for (int i = 0; i < Jatekos2.KezbenLevoLapok.Length; i++)
+                Console.WriteLine($"{jatekos.Nev} köre.\nLerakod a kijelölt {jatekos.KezbenLevoLapok[i].Tipus.ToString()} lapot? (I/N)");
+                do
                 {
-                    string bemenet;
-                    Console.Clear();
-                    Grafika.CsatamezotKirajzol(Csatamezo, Jatekos1, Jatekos2);
-                    Grafika.KezbenLevoLapokatKirajzol(Jatekos2, i);
-                    Console.SetCursorPosition(0, 32);
-                    Console.WriteLine($"{Jatekos2.Nev} köre.\nLerakod a kijelölt {Jatekos2.KezbenLevoLapok[i].Tipus.ToString()} lapot? (I/N)");
-                    do
-                    {
-                        Console.SetCursorPosition(0, 35);
-                        bemenet = Console.ReadLine();
-                    } while (bemenet.ToLower() != "i" && bemenet.ToLower() != "n");
+                    Console.SetCursorPosition(0, 35);
+                    bemenet = Console.ReadLine();
+                } while (bemenet.ToLower() != "i" && bemenet.ToLower() != "n");
 
-                    if (bemenet.ToLower() == "i")
+                if (bemenet.ToLower() == "i")
+                {
+                    if (jatekos.KezbenLevoLapok[i] is MezonyLap)
                     {
-                        if (Jatekos2.KezbenLevoLapok[i] is MezonyLap)
-                        { 
-                            Csatamezo.J2Lapjai[i] = (MezonyLap)Jatekos2.KezbenLevoLapok[i];
-                            Jatekos2.KezbenLevoLapok[i] = null;
+                        elhelyezettLapjai[i] = (MezonyLap)jatekos.KezbenLevoLapok[i];
+                        jatekos.KezbenLevoLapok[i] = null;
+                    }
+                    else
+                    {
+                        int x = Csatamezo.SzabadIdojarasKoordinata();
+                        if (x < 5)
+                        {
+                            Csatamezo.IdojarasLapok[x] = (IdojarasLap)jatekos.KezbenLevoLapok[i];
+                            jatekos.KezbenLevoLapok[i] = null;
                         }
                         else
                         {
-                            int x = Csatamezo.SzabadIdojarasKoordinata();
-                            if (x < 5)
-                            {
-                                Csatamezo.IdojarasLapok[x] = (IdojarasLap)Jatekos2.KezbenLevoLapok[i];
-                                Jatekos2.KezbenLevoLapok[i] = null;
-                            }
-                            else
-                            {
-                                Console.SetCursorPosition(0, 35);
-                                Console.WriteLine("Nem helyezhetsz el több időjárás lapot.");
-                            }
+                            Console.SetCursorPosition(0, 35);
+                            Console.WriteLine("Nem helyezhetsz el több időjárás lapot.");
                         }
                     }
                 }
+                Csatamezo.IdojarasLapokatAktival();
             }
         }
 
+        /// <summary>
+        /// Kiértékeli a játék (háború) eredményét és kiírja hogy ki nyert.
+        /// </summary>
+        private void JatekvegiKiertekeles()
+        {
+            if (Jatekos1.EletekSzama > Jatekos2.EletekSzama)
+            {
+                Console.WriteLine($"{Jatekos1.Nev} nyerte a háborút.");
+            }
+            else if (Jatekos1.EletekSzama < Jatekos2.EletekSzama)
+            {
+                Console.WriteLine($"{Jatekos2.Nev} nyerte a háborút.");
+            }
+            else
+            {
+                Console.WriteLine("Döntetlen.");
+            }
+
+            // Új játék?
+            string be;
+            Console.SetCursorPosition(0, 36);
+            Console.WriteLine("Szeretnél újra játszani? (I/N)");
+            do
+            {
+                Console.SetCursorPosition(0, 37);
+                be = Console.ReadLine();
+            } while (be.ToLower() != "i" && be.ToLower() != "n");
+
+            if (be.ToLower() == "i")
+            {
+                Init();
+                Loop();
+            }
+            else
+            {
+                Console.WriteLine("Viszlát!");
+                Console.ReadLine();
+            }
+        }
+
+        /// <summary>
+        /// Kiértékeli a kör végén, mely játékos nyert és kiírja az eredményt.
+        /// </summary>
+        private void KorvegiKiertekeles()
+        {
+            Console.Clear();
+            Grafika.CsatamezotKirajzol(Csatamezo, Jatekos1, Jatekos2);
+            Console.SetCursorPosition(0, 32);
+            if (Csatamezo.Jatekos1Pontjai == Csatamezo.Jatekos2Pontjai)
+            {
+                Console.WriteLine($"Ebben az ütközetben mindkét sereg odaveszett.");
+                Jatekos1.EletekSzama--;
+                Jatekos2.EletekSzama--;
+            }
+            else if (Csatamezo.Jatekos1Pontjai < Csatamezo.Jatekos2Pontjai)
+            {
+                Console.WriteLine($"{Jatekos2.Nev} nyerte ezt a csatát {Csatamezo.Jatekos2Pontjai} ponttal.");
+                Jatekos1.EletekSzama--;
+            }
+            else
+            {
+                Console.WriteLine($"{Jatekos1.Nev} nyerte ezt a csatát {Csatamezo.Jatekos1Pontjai} ponttal.");
+                Jatekos2.EletekSzama--;
+            }
+            Console.ReadLine();
+        }
+
+        /// <summary>
+        /// Legenerálja a játék paklit.
+        /// </summary>
         private void PakliGeneralas()
         {
             // 9 Gyalogos
@@ -237,6 +278,9 @@ namespace EasyGwentWU77OW
 
         }
 
+        /// <summary>
+        /// Megkeveri a paklit.
+        /// </summary>
         private void Kever()
         {
             for (int j = 0; j < 5; j++)
@@ -248,6 +292,12 @@ namespace EasyGwentWU77OW
             }
         }
 
+        /// <summary>
+        /// Megcseréli a pakli két elemét.
+        /// </summary>
+        /// <param name="i">Első elem indexe</param>
+        /// <param name="j">Második elem indexe</param>
+        /// <param name="pakli">Lap[] tömb, amiben meg akarjuk cserélni a két elemet.</param>
         private void Csere(int i, int j, Lap[] pakli)
         {
             Lap tmp = pakli[i];
@@ -255,6 +305,9 @@ namespace EasyGwentWU77OW
             pakli[j] = tmp;
         }
 
+        /// <summary>
+        /// Kiosztja a lapokat a két játékos részére.
+        /// </summary>
         private void LapokatKioszt()
         {
             for (int i = 0; i < 15; i++)

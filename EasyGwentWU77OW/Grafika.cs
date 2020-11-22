@@ -24,10 +24,16 @@ namespace EasyGwentWU77OW
 
         public Grafika(Lap lap, bool kivalasztva)
         {
-            lapSzin = (kivalasztva) ? ConsoleColor.Yellow : ConsoleColor.White ;
+            lapSzin = (kivalasztva) ? ConsoleColor.Yellow : ConsoleColor.White;
             this.tipus = lap.Tipus.ToString();
             if (lap is MezonyLap)
+            {
                 this.ertek = ((MezonyLap)lap).AktualisErtek;
+                if (((MezonyLap)lap).Gyengitett)
+                {
+                    lapSzin = ConsoleColor.DarkGray;
+                }
+            }
             else
                 this.ertek = 0;
         }
@@ -39,7 +45,7 @@ namespace EasyGwentWU77OW
             Console.SetCursorPosition(66, 2);
             Console.Write($"{j1.Nev.ToUpper()}");
             Console.SetCursorPosition(66, 3);
-            Console.Write($"Pontok:{csatamezo.Jatekos1Pontjai}");
+            Console.Write($"Pontok: {csatamezo.Jatekos1Pontjai}");
             Console.SetCursorPosition(66, 4);
             Console.Write($"Életek: {j1.EletekSzama}");
 
@@ -48,21 +54,20 @@ namespace EasyGwentWU77OW
             Console.SetCursorPosition(66, 9);
             Console.Write($"{j2.Nev.ToUpper()}");
             Console.SetCursorPosition(66, 10);
-            Console.Write($"Pontok:{csatamezo.Jatekos2Pontjai}");
+            Console.Write($"Pontok: {csatamezo.Jatekos2Pontjai}");
             Console.SetCursorPosition(66, 11);
             Console.Write($"Életek: {j2.EletekSzama}");
 
-            VonalatRajzol(14, ConsoleColor.DarkCyan);
-            SortKirajzol(15, csatamezo.IdojarasLapok);
-            Console.SetCursorPosition(66, 18);
+            VonalatRajzol(15, ConsoleColor.DarkCyan);
+            SortKirajzol(16, csatamezo.IdojarasLapok);
+            Console.SetCursorPosition(66, 19);
             Console.Write("IDŐJÁRÁS");
-            VonalatRajzol(21, ConsoleColor.DarkCyan);
+            VonalatRajzol(22, ConsoleColor.DarkCyan);
         }
 
         public static void KezbenLevoLapokatKirajzol(Jatekos jatekos, int kivalasztottLapSzama)
         {
             int y = 25;
-            //SortKirajzol(25, jatekos.KezbenLevoLapok);
             for (int i = 0; i < jatekos.KezbenLevoLapok.Length; i++)
             {
                 if (jatekos.KezbenLevoLapok[i] == null)
@@ -74,6 +79,8 @@ namespace EasyGwentWU77OW
                     LapotKirajzol((i * (szelesseg + 2) + 1), y, new Grafika(jatekos.KezbenLevoLapok[i], (i == kivalasztottLapSzama)));
                 }
             }
+            Console.SetCursorPosition(66, 28);
+            Console.Write($"{jatekos.Nev} Lapjai");
         }
 
         public static void SortKirajzol(int y, Lap[] lapok)
