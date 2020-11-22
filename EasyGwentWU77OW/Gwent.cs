@@ -149,8 +149,19 @@ namespace EasyGwentWU77OW
                 {
                     if (jatekos.KezbenLevoLapok[i] is MezonyLap)
                     {
-                        elhelyezettLapjai[i] = (MezonyLap)jatekos.KezbenLevoLapok[i];
-                        jatekos.KezbenLevoLapok[i] = null;
+                        int x = Csatamezo.ElhelyezettLapokTipusbol(jatekos.KezbenLevoLapok[i].Tipus);
+                        if (x < 5)
+                        {
+                            elhelyezettLapjai[i] = (MezonyLap)jatekos.KezbenLevoLapok[i];
+                            jatekos.KezbenLevoLapok[i] = null;
+                        }
+                        else
+                        {
+                            Console.SetCursorPosition(0, 35);
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine($"Nem helyezhetsz el több {jatekos.KezbenLevoLapok[i].Tipus} lapot.");
+                            Thread.Sleep(1000);
+                        }
                     }
                     else
                     {
@@ -163,7 +174,9 @@ namespace EasyGwentWU77OW
                         else
                         {
                             Console.SetCursorPosition(0, 35);
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Nem helyezhetsz el több időjárás lapot.");
+                            Thread.Sleep(1000);
                         }
                     }
                 }
@@ -220,9 +233,22 @@ namespace EasyGwentWU77OW
             Console.SetCursorPosition(0, 32);
             if (Csatamezo.Jatekos1Pontjai == Csatamezo.Jatekos2Pontjai)
             {
-                Console.WriteLine($"Ebben az ütközetben mindkét sereg odaveszett.");
-                Jatekos1.EletekSzama--;
-                Jatekos2.EletekSzama--;
+                if (Jatekos1.Nev.ToLower() == "nilfgaardian")
+                {
+                    Console.WriteLine($"{Jatekos1.Nev} nyerte ezt a csatát {Csatamezo.Jatekos1Pontjai} ponttal, mert ő nilfgaardi.");
+                    Jatekos2.EletekSzama--;
+                }
+                else if (Jatekos2.Nev.ToLower() == "nilfgaardian")
+                {
+                    Console.WriteLine($"{Jatekos2.Nev} nyerte ezt a csatát {Csatamezo.Jatekos2Pontjai} ponttal, mert ő nilfgaardi.");
+                    Jatekos1.EletekSzama--;
+                }
+                else
+                {
+                    Console.WriteLine($"Ebben az ütközetben mindkét sereg odaveszett.");
+                    Jatekos1.EletekSzama--;
+                    Jatekos2.EletekSzama--;
+                }
             }
             else if (Csatamezo.Jatekos1Pontjai < Csatamezo.Jatekos2Pontjai)
             {
@@ -262,6 +288,7 @@ namespace EasyGwentWU77OW
             pakli[14] = new MezonyLap(LapTipus.Tavolsagi, 7);
             pakli[15] = new MezonyLap(LapTipus.Tavolsagi, 8);
             pakli[16] = new MezonyLap(LapTipus.Tavolsagi, 9);
+
 
             // 8 Harcigép
             pakli[17] = new MezonyLap(LapTipus.Harcigep, 4);
