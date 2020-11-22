@@ -18,19 +18,13 @@ namespace EasyGwentWU77OW
             Gwent jatek = new Gwent();
             jatek.Init();
             Console.ReadLine();
+
             Console.Clear();
-
-            Grafika.LapokHelyetKirajzolTeszt();
-
-            Console.ReadLine();
-            Console.Clear();
-
-            Grafika.MezonyLapokatKirajzolTeszt();
+            
 
             Console.ReadLine();
 
-            Console.Clear();
-            Console.ReadLine();
+
         }
 
 

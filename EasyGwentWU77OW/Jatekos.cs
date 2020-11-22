@@ -11,7 +11,7 @@ namespace EasyGwentWU77OW
         private Random r = new Random();
         public int EletekSzama { get; set; }
         public string Nev { get; private set; }
-        
+
         public Lap[] OsztottLapok { get; set; }
         public Lap[] KezbenLevoLapok { get; set; }
 
@@ -19,32 +19,34 @@ namespace EasyGwentWU77OW
         public Jatekos(string nev)
         {
             Nev = nev;
+            EletekSzama = 2;
             OsztottLapok = new Lap[15];
             KezbenLevoLapok = new Lap[5];
         }
 
         public void Felhuz()
         {
-            while (KezbenLevoLapokSzama() != 5)
+            while (KezbenLevoLapokSzama() != 5 && OsztottLapokSzama() > 0)
             {
                 for (int i = 0; i < KezbenLevoLapok.Length; i++)
                 {
-
+                    if (KezbenLevoLapok[i] == null)
+                    {
+                        int j = 0;
+                        while (j < OsztottLapok.Length && KezbenLevoLapok[i] == null)
+                        {
+                            if (OsztottLapok[j] != null)
+                            {
+                                KezbenLevoLapok[i] = OsztottLapok[j];
+                                OsztottLapok[j] = null;
+                            }
+                            j++;
+                        }
+                    }
                 }
             }
         }
 
-        //public void Felhuz()
-        //{
-        //    for (int i = 0; i < KezbenLevoLapok.Length; i++)
-        //    {
-        //        if (KezbenLevoLapok[i] == null)
-        //        {
-        //            int j = r.Next(OsztottLapok.Length);    // TODO: Lehet jobb ha nem random
-        //            KezbenLevoLapok[i] = OsztottLapok[j];
-        //        }
-        //    }
-        //}
 
         public int KezbenLevoLapokSzama()
         {

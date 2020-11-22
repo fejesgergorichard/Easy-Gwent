@@ -10,10 +10,11 @@ namespace EasyGwentWU77OW
     public class Gwent
     {
         Random r = new Random();
+        Lap[] pakli = new Lap[30];
         public Jatekos Jatekos1 { get; private set; }
         public Jatekos Jatekos2 { get; private set; }
-        public Csatamezo csatamezo = new Csatamezo();
-        Lap[] pakli = new Lap[30];
+        public Csatamezo Csatamezo = new Csatamezo();
+        
         int hatralevoKorokSzama = 3;        // 3...0
         bool jatekFolyamatban = true;
 
@@ -22,6 +23,31 @@ namespace EasyGwentWU77OW
         /// </summary>
         public void Init()
         {
+            Console.WriteLine(
+                @"
+                   {}
+   ,   A           {}
+  / \, | ,        .--.
+ |    =|= >      /.--.\
+  \ /` | `       |====|
+   `   |         |`::`|  
+       |     .-;`\..../`;_.-^-._
+      /\\/  /  |...::..|`   :   `|
+      |:'\ |   /'''::''|   .:.   |
+       \ /\;-,/\   ::  |..GWENT..|
+       |\ <` >  >._::_.| ':   :' |
+       | `""""`  /   ^^  |   ':'   |
+       |       |       \    :    /
+       |       |        \   :   / 
+       |       |___/\___|`-.:.-`
+       |        \_ || _/    `
+       |        <_ >< _>
+       |        |  ||  |
+       |        |  ||  |
+       |       _\.:||:./_
+       |      /____/\____\");
+            Console.WriteLine();
+            Console.WriteLine();
             // Játékos 1 létrehozása
             string nev;
             do
@@ -29,7 +55,7 @@ namespace EasyGwentWU77OW
                 Console.Write("Játékos 1 neve: ");
                 nev = Console.ReadLine();
             }
-            while (nev == null || nev == "");
+            while (nev == null || nev == "" || nev.Length > 20);
             Jatekos1 = new Jatekos(nev);
 
             // Játékos 2 létrehozása
@@ -39,7 +65,7 @@ namespace EasyGwentWU77OW
                 Console.Write("Játékos 2 neve: ");
                 nev = Console.ReadLine();
             }
-            while (nev == null || nev == "" || nev == Jatekos1.Nev);
+            while (nev == null || nev == "" || nev == Jatekos1.Nev || nev.Length > 20);
             Jatekos2 = new Jatekos(nev);
 
             // Pakli generálás
@@ -63,6 +89,16 @@ namespace EasyGwentWU77OW
                 Console.Write(".");
             }
 
+            // Játékosok lapokat húznak
+            Jatekos1.Felhuz();
+            Jatekos2.Felhuz();
+
+            Console.WriteLine();
+            Console.WriteLine("A játék készen áll. Üss entert a kezdéshez!");
+            Console.ReadLine();
+            
+            // Indul a játék
+            Loop();
         }
 
         public void Loop()
@@ -71,9 +107,32 @@ namespace EasyGwentWU77OW
             // kirajzoljuk, megkérdezzük a játékost 5x hogy az adott lapot lerakja-e. a lap sárga lesz
             //// minden eldöntés után aktiváljuk az időjárás lapokat majd újra rajzolunk
             // Utána a másiknál ugyanezt eljátsszuk és a végén kiírjuk hogy kinek hány pontja van, ki nyert
-            for (int i = 0; i < Jatekos1.KezbenLevoLapok.Length; i++)
+            while (hatralevoKorokSzama > 0 && (Jatekos1.EletekSzama > 0 || Jatekos2.EletekSzama > 0))
             {
+                for (int i = 0; i < Jatekos1.KezbenLevoLapok.Length; i++)
+                {
+                    string bemenet;
+                    Console.Clear();
+                    Grafika.CsatamezotKirajzol(Csatamezo, Jatekos1, Jatekos2);
+                    Grafika.KezbenLevoLapokatKirajzol(Jatekos1, i);
+                    Console.SetCursorPosition(0, 32);
+                    Console.WriteLine($"{Jatekos1.Nev} köre.\nLerakod a kijelölt {Jatekos1.KezbenLevoLapok[i].Tipus.ToString()} lapot? (I/N)");
+                    do
+                    {
+                        Console.SetCursorPosition(0, 34);
+                        bemenet = Console.ReadLine();
+                    } while (bemenet.ToLower() != "i" && bemenet.ToLower() != "n");
 
+                    if (bemenet.ToLower() == "i")
+                    {
+                        if (Jatekos1.KezbenLevoLapok[i] is MezonyLap)
+                            Csatamezo.J1Lapjai[i] = (MezonyLap)Jatekos1.KezbenLevoLapok[i];
+                        else
+                            Csatamezo.IdojarasLapok[1] = (IdojarasLap)Jatekos1.KezbenLevoLapok[i];
+                    }
+                    hatralevoKorokSzama--;
+
+                }
             }
         }
 
