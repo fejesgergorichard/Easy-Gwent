@@ -11,7 +11,7 @@ namespace EasyGwentWU77OW
         public IdojarasLap(LapTipus tipus) : base(tipus) { }
 
         /// <summary>
-        /// Aktiválja a lap hatását a mezőn elhelyezett lapokra.
+        /// Aktiválja a lap hatását a mezőn elhelyezett lapokra. Gyengít vagy visszaállít mindent.
         /// </summary>
         public void Aktival(Csatamezo csatamezo)
         {
@@ -40,37 +40,41 @@ namespace EasyGwentWU77OW
         /// <param name="gyengitettTipus">A gyengített kártya típus.</param>
         public void Gyengit(LapTipus gyengitettTipus, Csatamezo csatamezo)
         {
-            for (int i = 0; i < csatamezo.J1Mezoi.LerakottLapok.Length; i++)
+            for (int i = 0; i < csatamezo.J1Lapjai.Length; i++)
             {
                 // Játékos 1 lerakott lapjait gyengíti
-                if (csatamezo.J1Mezoi.LerakottLapok[i] != null && csatamezo.J1Mezoi.LerakottLapok[i].Tipus == gyengitettTipus)
+                if (csatamezo.J1Lapjai[i] != null && csatamezo.J1Lapjai[i].Tipus == gyengitettTipus)
                 {
-                    csatamezo.J1Mezoi.LerakottLapok[i].Gyengitett = true;
+                    csatamezo.J1Lapjai[i].Gyengitett = true;
                 }
 
                 // Játékos 2 lerakott lapjait gyengítí
-                if (csatamezo.J2Mezoi.LerakottLapok[i] != null && csatamezo.J2Mezoi.LerakottLapok[i].Tipus == gyengitettTipus)
+                if (csatamezo.J2Lapjai[i] != null && csatamezo.J2Lapjai[i].Tipus == gyengitettTipus)
                 {
-                    csatamezo.J2Mezoi.LerakottLapok[i].Gyengitett = true;
+                    csatamezo.J2Lapjai[i].Gyengitett = true;
                 }
             }
         }
 
+        /// <summary>
+        /// Visszaállítja az összes mezőny lap harci értékét és eltűnteti az időjárás lapokat.
+        /// </summary>
+        /// <param name="csatamezo"></param>
         public void Visszaallit(Csatamezo csatamezo)
         {
             // Értékek visszaállításra alapra
             for (int i = 0; i < 5; i++)
             {
                 // Játékos 1 lerakott lapjai
-                if (csatamezo.J1Mezoi.LerakottLapok[i] != null)
+                if (csatamezo.J1Lapjai[i] != null)
                 {
-                    csatamezo.J1Mezoi.LerakottLapok[i].Gyengitett = false;
+                    csatamezo.J1Lapjai[i].Gyengitett = false;
                 }
 
                 // Játékos 2 lerakott lapjai
-                if (csatamezo.J2Mezoi.LerakottLapok[i] != null)
+                if (csatamezo.J2Lapjai[i] != null)
                 {
-                    csatamezo.J2Mezoi.LerakottLapok[i].Gyengitett = false;
+                    csatamezo.J2Lapjai[i].Gyengitett = false;
                 }
             }
 

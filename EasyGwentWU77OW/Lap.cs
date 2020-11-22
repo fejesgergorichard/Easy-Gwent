@@ -20,13 +20,11 @@ namespace EasyGwentWU77OW
 
     public class Lap
     {
-        private LapTipus tipus;
-
-        public LapTipus Tipus { get { return tipus; } }
+        public LapTipus Tipus { get; private set; }
 
         public Lap(LapTipus tipus)
         {
-            this.tipus = tipus;
+            Tipus = tipus;
         }
     }
 }

@@ -65,6 +65,18 @@ namespace EasyGwentWU77OW
 
         }
 
+        public void Loop()
+        {
+            // TODO: amíg nem 0 kör és nem 0 élet van valakinél, addig ismétlődjön
+            // kirajzoljuk, megkérdezzük a játékost 5x hogy az adott lapot lerakja-e. a lap sárga lesz
+            //// minden eldöntés után aktiváljuk az időjárás lapokat majd újra rajzolunk
+            // Utána a másiknál ugyanezt eljátsszuk és a végén kiírjuk hogy kinek hány pontja van, ki nyert
+            for (int i = 0; i < Jatekos1.KezbenLevoLapok.Length; i++)
+            {
+
+            }
+        }
+
         private void PakliGeneralas()
         {
             // 9 Gyalogos
@@ -133,5 +145,6 @@ namespace EasyGwentWU77OW
                 Jatekos2.OsztottLapok[i] = pakli[i + 15];
             }
         }
+
     }
 }

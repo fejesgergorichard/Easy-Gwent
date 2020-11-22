@@ -9,10 +9,11 @@ namespace EasyGwentWU77OW
     public class Jatekos
     {
         private Random r = new Random();
+        public int EletekSzama { get; set; }
         public string Nev { get; private set; }
         
         public Lap[] OsztottLapok { get; set; }
-        Lap[] KezbenLevoLapok { get; set; }
+        public Lap[] KezbenLevoLapok { get; set; }
 
 
         public Jatekos(string nev)

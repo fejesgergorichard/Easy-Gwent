@@ -8,6 +8,9 @@ namespace EasyGwentWU77OW
 {
     class Grafika
     {
+        // TODO: aktuális csatatér kirajzolása
+        // TODO: 1-1 sor a játékosoknak, 1 sor az időjárásnak
+
         const int szelesseg = 11;
         const int magassag = 6;
         const int kezbenLevoLapokY = 46;
