@@ -16,7 +16,7 @@ namespace EasyGwentWU77OW
         Csatamezo Csatamezo = new Csatamezo();
 
         /// <summary>
-        /// Játék inicializálása.
+        /// Játék indítása.
         /// </summary>
         public void Start()
         {
@@ -69,9 +69,6 @@ namespace EasyGwentWU77OW
                 Kilepes();
             }
             else
-            {
-                // 1
-            }
             {
                 JatekLoop();
             }
