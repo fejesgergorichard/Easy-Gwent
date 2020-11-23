@@ -22,30 +22,66 @@ namespace EasyGwentWU77OW
         {
             Console.Clear();
             Console.WriteLine(
-                @"
-                   {}
-   ,   A           {}
-  / \, | ,        .--.
- |    =|= >      /.--.\
-  \ /` | `       |====|
-   `   |         |`::`|  
-       |     .-;`\..../`;_.-^-._
-      /\\/  /  |...::..|`   :   `|
-      |:'\ |   /'''::''|   .:.   |
-       \ /\;-,/\   ::  |..GWENT..|
-       |\ <` >  >._::_.| ':   :' |
-       | `""""`  /   ^^  |   ':'   |
-       |       |       \    :    /
-       |       |        \   :   / 
-       |       |___/\___|`-.:.-`
-       |        \_ || _/    `
-       |        <_ >< _>
-       |        |  ||  |
-       |        |  ||  |
-       |       _\.:||:./_
-       |      /____/\____\");
+                                                @"
+                                                   {}
+                                   ,   A           {}
+                                  / \, | ,        .--.
+                                 |    =|= >      /.--.\
+                                  \ /` | `       |====|
+                                   `   |         |`::`|  
+                                       |     .-;`\..../`;_.-^-._
+                                      /\\/  /  |...::..|`   :   `|
+                                      |:'\ |   /'''::''|   .:.   |
+                                       \ /\;-,/\   ::  |..GWENT..|
+                                       |\ <` >  >._::_.| ':   :' |
+                                       | `""""`  /   ^^  |   ':'   |
+                                       |       |       \    :    /
+                                       |       |        \   :   / 
+                                       |       |___/\___|`-.:.-`
+                                       |        \_ || _/    `
+                                       |        <_ >< _>
+                                       |        |  ||  |
+                                       |        |  ||  |
+                                       |       _\.:||:./_
+                                       |      /____/\____\");
             Console.WriteLine();
             Console.WriteLine();
+
+            Console.WriteLine("\t\t\t\t\t   - EASY GWENT -\n\n");
+            Console.WriteLine("\t\t\t\t\t   1 - Új játék");
+            Console.WriteLine("\t\t\t\t\t   2 - Ismertető");
+            Console.WriteLine("\t\t\t\t\t   3 - Kilépés\n\n");
+            string valasztas;
+            do
+            {
+                Console.Write("Válassz egy opciót: ");
+                valasztas = Console.ReadLine();
+            }
+            while (valasztas == null || valasztas == "" || (valasztas != "1" && valasztas != "2" && valasztas != "3"));
+            if (valasztas == "2")
+            {
+                Grafika.Szabalyok();
+                Console.ReadLine();
+                Start();
+            }
+            else if (valasztas == "3")
+            {
+                Kilepes();
+            }
+            else
+            {
+                // 1
+            }
+            {
+                JatekLoop();
+            }
+        }
+
+        /// <summary>
+        /// Létrehozza a játékosokat és kiosztja a lapokat.
+        /// </summary>
+        private void JatekInit()
+        {
             // Játékos 1 létrehozása
             string nev;
             do
@@ -90,15 +126,14 @@ namespace EasyGwentWU77OW
             Console.WriteLine();
             Console.WriteLine("A játék készen áll. Üss entert a kezdéshez!");
             Console.ReadLine();
-
-            // Indul a játék
-            Loop();
         }
+
         /// <summary>
         /// A játék fő loopja. Mindaddig ismétlődik, amíg valamelyik játékosnak van élete és a felhasználó játszani akar.
         /// </summary>
-        private void Loop()
+        private void JatekLoop()
         {
+            JatekInit();
             // Amíg nem 0 élet van valakinél, addig ismétlődjön
             // kirajzoljuk az állapotot, megkérdezzük a játékost 5x hogy az adott lapot lerakja-e. a kijelölt lap sárga lesz
             //// minden eldöntés után aktiváljuk az időjárás lapokat majd újra rajzolunk
@@ -214,13 +249,19 @@ namespace EasyGwentWU77OW
 
             if (be.ToLower() == "i")
             {
-                Start();
+                JatekLoop();
             }
             else
             {
-                Console.WriteLine("Viszlát!");
-                Console.ReadLine();
+                Kilepes();
             }
+        }
+
+        private static void Kilepes()
+        {
+            Console.WriteLine("Viszlát!");
+            Console.ReadLine();
+            Environment.Exit(0);
         }
 
         /// <summary>

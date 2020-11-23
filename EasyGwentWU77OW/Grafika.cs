@@ -36,6 +36,25 @@ namespace EasyGwentWU77OW
                 this.ertek = 0;
         }
 
+        public static void Szabalyok()
+        {
+            Console.Clear();
+            Console.SetCursorPosition(1, 1);
+            Console.WriteLine("- SZABÁLYZAT -\n");
+            Console.WriteLine("A paklit 25 lap alkotja:\n" +
+                "\t- 9 Gyalogos egység\n\t- 8 Távolsági egység\n\t- 8 Harcigép egység\n" +
+                "\t- 5 időjárás lap\n\t\t- Eső(2x): A harcigépeket gyengíti\n\t\t- Köd: A távolsági egységeket gyengíti\n\t\t- Fagy: A gyalogos egységeket gyengíti" +
+                "\n\t\t- Napsütés: Eltüntet minden időjárás lapot és azok hatását megszünteti\n" +
+                "\tGyengítés alatt azt értjük, hogy a gyengített típusok harci értékét 1-re állítja.\n\tEzeket a lapokat szürkével jelöljük:\n");
+            MezonyLap l = new MezonyLap(LapTipus.Gyalogos, 9);
+            l.Gyengitett = true;
+            LapotKirajzol(9, 14, new Grafika(l, false));
+            Console.SetCursorPosition(0, 21);
+            Console.WriteLine("A játék kezdetén minden játékos 15-15 lapot kap a pakliból.\nEbből 5 lapot kézbe vesznek és minden lapról eldönthetik, hogy lerakják-e vagy sem." +
+                "\nAmikor mindkét játékos lerakta a lapjait, a kör végén azok értékét összegezzük.\nAz nyeri a kört, akinek több pontja volt a lerakott lapokból." +
+                "\nA kör végén a vesztes játékos egy életet veszít." +
+                "\n\nA játék addig tart, ameddig valamelyik játékosnak el nem fogy az élete.");
+        }
 
         /// <summary>
         /// Kirajzolja a csatamezőt és az egyes játékosok statisztikáit.
